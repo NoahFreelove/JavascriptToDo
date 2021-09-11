@@ -1,3 +1,10 @@
+/*
+* JavascriptToDo - Version 1.0 - Noah Freelove
+*
+* This app lets the user create a task and set a deadline.
+* The time is updated every second and each task is checked to see if the deadline has been passed
+* */
+
 const doc = document;
 class Task
 {
@@ -14,6 +21,7 @@ function CheckDeadlines()
 {
     let date;
     date = new Date();
+    let deadlineChange = false;
 
     for (let i = 0; i < tasks.length; i++) {
         let hourMinute = [0,0]
@@ -23,6 +31,7 @@ function CheckDeadlines()
         {
             console.log(`past deadline task index: ${i}`)
             tasks[i].pastDeadline = true;
+            deadlineChange = true;
         }
         else if (date.getHours() == hourMinute[0])
         {
@@ -30,6 +39,7 @@ function CheckDeadlines()
             {
                 console.log(`past deadline task index: ${i}`)
                 tasks[i].pastDeadline = true;
+                deadlineChange = true;
             }
             else {
                 console.log(`not past deadline task index: ${i}`)
@@ -41,10 +51,10 @@ function CheckDeadlines()
             tasks[i].pastDeadline = false;
         }
     }
+    return deadlineChange;
 }
 
-function UpdateTime()
-{
+function UpdateTime() {
     let date;
     date = new Date();
     let h = date.getHours();
@@ -54,8 +64,10 @@ function UpdateTime()
     let mo = date.getMonth()
     doc.getElementById('lastTimeUpdated').innerHTML =
         `<footer>Last time updated: ${mo}/${d} at ${h}:${m}:${s}</footer>`;
-    CheckDeadlines();
-    RenderTasks();
+    if (CheckDeadlines()){
+        RenderTasks();
+        console.log("Rendered Tasks")
+    }
 }
 
 function RenderTasks()
@@ -75,13 +87,27 @@ function RenderTasks()
         Past Deadline: ${tasks[i].pastDeadline ? "Yes" : "No"}
         </div><BR/>`;
     }
+    taskList += `<button onclick="RemoveTasks()">Remove Past Deadline Tasks</button>`
     id.innerHTML = taskList;
 }
+
 function AddTask() {
+    setInterval(UpdateTime , 1000)
     console.log(tasks)
     let tempTask = new Task
     (doc.getElementById('taskName').value, doc.getElementById('deadline').value);
     tasks.push(tempTask);
     UpdateTime();
+    RenderTasks();
+}
+
+function RemoveTasks()
+{
+    for (let i = 0; i < tasks.length; i++) {
+        if(tasks[i].pastDeadline)
+        {
+            tasks.splice(i,1)
+        }
+    }
     RenderTasks();
 }
