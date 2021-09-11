@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<body onload="RenderTasks()">
+<body onload="UpdateTime()">
+<link rel="stylesheet" href="style.css">
 
   <body>
   <!--
@@ -11,14 +12,14 @@
     <section class="container">
         <h1>Add New Task</h1>
         <div>
-          <label for="taskName">Task Name:</label>
+          <label id="taskNameLabel" for="taskName">Task Name:</label>
           <input type="text" id="taskName">
         </div>
         <div>
-          <label for="deadline">Deadline (hour:minute):</label>
+          <label id="deadlineLabel" for="deadline">Deadline (hour:minute):</label>
           <input type="text" id="deadline">
         </div>
-        <button onclick="AddTask()">Create New</button>
+        <button onclick="AddTask()">Create New Task</button>
     </section>
 
     <h1>Current Tasks:</h1>

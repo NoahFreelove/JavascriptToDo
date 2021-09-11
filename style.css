@@ -1,0 +1,29 @@
+body {
+    background-color: darkgray;
+}
+
+label#deadlineLabel{
+    color: darkslategrey;
+    font-family: Arial ;
+}
+
+label#taskNameLabel{
+    color: darkslategrey;
+    font-family: Arial ;
+}
+
+h1{
+    font-family: Arial ;
+}
+
+section#tasks{
+    font-family: Arial ;
+}
+
+footer#lastTimeUpdated{
+    /* The best font */
+    font-family: "Comic Sans MS";
+}
+button{
+    font-family: Courier;
+}
