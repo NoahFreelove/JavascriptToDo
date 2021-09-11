@@ -21,23 +21,23 @@ function CheckDeadlines()
 
         if(date.getHours() > hourMinute[0])
         {
-            console.log("past deadline " + i)
+            console.log(`past deadline task index: ${i}`)
             tasks[i].pastDeadline = true;
         }
         else if (date.getHours() == hourMinute[0])
         {
             if(date.getMinutes()>= hourMinute[1])
             {
-                console.log("past deadline " + i)
+                console.log(`past deadline task index: ${i}`)
                 tasks[i].pastDeadline = true;
             }
             else {
-                console.log("not past deadline " + i)
+                console.log(`not past deadline task index: ${i}`)
                 tasks[i].pastDeadline = false;
             }
         }
         else {
-            console.log("not past deadline " + i)
+            console.log(`not past deadline task index: ${i}`)
             tasks[i].pastDeadline = false;
         }
     }
