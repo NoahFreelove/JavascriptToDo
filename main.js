@@ -1,3 +1,5 @@
+
+// Great!! you've add documentation in your page
 /*
 * JavascriptToDo - Version 1.0 - Noah Freelove
 *
@@ -8,14 +10,22 @@
 const doc = document;
 class Task
 {
-    constructor(taskName, deadline, pastDeadline) {
+    // you can create default value for pastDeadline and make it optional
+    constructor(taskName, deadline, pastDeadline = null) {
         this.taskName = taskName;
         this.deadline = deadline;
+        // you set a default vqlue for a variable by usig OR operator too
+        //  this.pastDeadline = pastDeadline || null
         this.pastDeadline = pastDeadline;
     }
 }
 
+// Create a class to store tasks, you can name it TaskRepository
+
 const tasks = [];
+
+// It a naming convention, not mandatory but when using classes, start class name with capital letter 
+// and function name with camelCase
 
 function CheckDeadlines()
 {
@@ -93,9 +103,15 @@ function RenderTasks()
 
 function AddTask() {
     setInterval(UpdateTime , 1000)
+    // It's better to remove logs from final code.
     console.log(tasks)
-    let tempTask = new Task
-    (doc.getElementById('taskName').value, doc.getElementById('deadline').value);
+
+    // 1- for readability, try to decalre variable at the first of the function
+    // 2- when number of parameters exceeds in one line, try to break each paramter in seprate line
+    let tempTask = new Task(
+        doc.getElementById('taskName').value, // sometimes adding a comment in front of parameters, helps readability 
+        doc.getElementById('deadline').value
+    );
     tasks.push(tempTask);
     UpdateTime();
     RenderTasks();
@@ -111,3 +127,7 @@ function RemoveTasks()
     }
     RenderTasks();
 }
+
+// Create a class to compose all other classes together and have a method like render page to render whole page
+// Create an init() function to initialize all your project
+// you can create a file for each classes and import them in your main code and in there you initiate your application
