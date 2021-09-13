@@ -1,5 +1,3 @@
-
-// Great!! you've add documentation in your page
 /*
 * JavascriptToDo - Version 1.0 - Noah Freelove
 *
@@ -11,10 +9,9 @@
 
 const tasks = [];
 
-// It a naming convention, not mandatory but when using classes, start class name with capital letter 
+// It a naming convention, not mandatory but when using classes, start class name with capital letter
 // and function name with camelCase
-
-function CheckDeadlines()
+function checkDeadlines()
 {
     let date;
     date = new Date();
@@ -51,7 +48,7 @@ function CheckDeadlines()
     return deadlineChange;
 }
 
-function UpdateTime() {
+function updateTime() {
     let date;
     date = new Date();
     let h = date.getHours();
@@ -61,13 +58,13 @@ function UpdateTime() {
     let mo = date.getMonth()
     document.getElementById('lastTimeUpdated').innerHTML =
         `<footer>Last time updated22: ${mo}/${d} at ${h}:${m}:${s}</footer>`;
-    if (CheckDeadlines()){
-        RenderTasks();
+    if (checkDeadlines()){
+        renderTasks();
         console.log("Rendered Tasks")
     }
 }
 
-function RenderTasks()
+function renderTasks()
 {
     let id = document.getElementById('tasks');
     let taskList = "";
@@ -84,27 +81,27 @@ function RenderTasks()
         Past Deadline: ${tasks[i].pastDeadline ? "Yes" : "No"}
         </div><BR/>`;
     }
-    taskList += `<button onclick="RemoveTasks()">Remove Past Deadline Tasks</button>`
+    taskList += `<button onclick="removeTasks()">Remove Past Deadline Tasks</button>`
     id.innerHTML = taskList;
 }
 
-function AddTask() {
-    setInterval(UpdateTime , 1000)
+function addTask() {
+    setInterval(updateTime , 1000)
     // It's better to remove logs from final code.
     console.log(tasks)
 
     // 1- for readability, try to decalre variable at the first of the function
     // 2- when number of parameters exceeds in one line, try to break each paramter in seprate line
     let tempTask = new Task(
-        document.getElementById('taskName').value, // sometimes adding a comment in front of parameters, helps readability 
+        document.getElementById('taskName').value, // sometimes adding a comment in front of parameters, helps readability
         document.getElementById('deadline').value
     );
     tasks.push(tempTask);
-    UpdateTime();
-    RenderTasks();
+    updateTime();
+    renderTasks();
 }
 
-function RemoveTasks()
+function removeTasks()
 {
     for (let i = 0; i < tasks.length; i++) {
         if(tasks[i].pastDeadline)
@@ -112,7 +109,7 @@ function RemoveTasks()
             tasks.splice(i,1)
         }
     }
-    RenderTasks();
+    renderTasks();
 }
 
 // Create a class to compose all other classes together and have a method like render page to render whole page
