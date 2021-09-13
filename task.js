@@ -1,12 +1,10 @@
-class Task
+class Task // task class is an object class that holds the relevant information to create a task
 {
-    // you can create default value for pastDeadline and make it optional
+    // default constructor
     constructor(taskName, deadline, pastDeadline = null) {
         this.taskName = taskName;
         this.deadline = deadline;
-        // you set a default vqlue for a variable by usig OR operator too
-        //  this.pastDeadline = pastDeadline || null
-        this.pastDeadline = pastDeadline;
+        this.pastDeadline = pastDeadline || null;
     }
 }
 
