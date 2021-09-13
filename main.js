@@ -6,47 +6,19 @@
 * */
 
 // Create a class to store tasks, you can name it TaskRepository
-
-const tasks = [];
-
-// It a naming convention, not mandatory but when using classes, start class name with capital letter
-// and function name with camelCase
-function checkDeadlines()
-{
-    let date;
-    date = new Date();
-    let deadlineChange = false;
-
-    for (let i = 0; i < tasks.length; i++) {
-        let hourMinute = [0,0]
-        hourMinute = tasks[i].deadline.split(':')
-
-        if(date.getHours() > hourMinute[0])
-        {
-            console.log(`past deadline task index: ${i}`)
-            tasks[i].pastDeadline = true;
-            deadlineChange = true;
-        }
-        else if (date.getHours() == hourMinute[0])
-        {
-            if(date.getMinutes()>= hourMinute[1])
-            {
-                console.log(`past deadline task index: ${i}`)
-                tasks[i].pastDeadline = true;
-                deadlineChange = true;
-            }
-            else {
-                console.log(`not past deadline task index: ${i}`)
-                tasks[i].pastDeadline = false;
-            }
-        }
-        else {
-            console.log(`not past deadline task index: ${i}`)
-            tasks[i].pastDeadline = false;
-        }
+class TaskRepository{
+    constructor(tasks) {
+        this.tasks = tasks;
     }
-    return deadlineChange;
 }
+const taskRepo = new TaskRepository(new Task)
+
+function init()
+{
+    updateTime();
+    setInterval(updateTime , 1000);
+}
+
 
 function updateTime() {
     let date;
@@ -57,59 +29,39 @@ function updateTime() {
     let d = date.getDay()
     let mo = date.getMonth()
     document.getElementById('lastTimeUpdated').innerHTML =
-        `<footer>Last time updated22: ${mo}/${d} at ${h}:${m}:${s}</footer>`;
+        `<footer>Last time updated: ${mo}/${d} at ${h}:${m}:${s}</footer>`;
     if (checkDeadlines()){
-        renderTasks();
+        renderPage();
         console.log("Rendered Tasks")
     }
 }
 
-function renderTasks()
-{
-    let id = document.getElementById('tasks');
-    let taskList = "";
-    if(tasks.length == 0)
-    {
-        id.innerHTML = "<div>You have no tasks!</div>"
-        return;
-    }
-    for (let i = 0; i < tasks.length; i++)
-    {
-        taskList += `<div>
-        Task: ${tasks[i].taskName}<BR/>
-        Deadline: ${tasks[i].deadline}<BR/>
-        Past Deadline: ${tasks[i].pastDeadline ? "Yes" : "No"}
-        </div><BR/>`;
-    }
-    taskList += `<button onclick="removeTasks()">Remove Past Deadline Tasks</button>`
-    id.innerHTML = taskList;
-}
+
 
 function addTask() {
-    setInterval(updateTime , 1000)
     // It's better to remove logs from final code.
-    console.log(tasks)
+    console.log(taskRepo.tasks)
 
     // 1- for readability, try to decalre variable at the first of the function
-    // 2- when number of parameters exceeds in one line, try to break each paramter in seprate line
+    // 2- when number of parameters exceeds in one line, try to break each parameter in seprate line
     let tempTask = new Task(
         document.getElementById('taskName').value, // sometimes adding a comment in front of parameters, helps readability
         document.getElementById('deadline').value
     );
-    tasks.push(tempTask);
+    taskRepo.tasks.push(tempTask);
     updateTime();
-    renderTasks();
+    renderPage();
 }
 
 function removeTasks()
 {
-    for (let i = 0; i < tasks.length; i++) {
-        if(tasks[i].pastDeadline)
+    for (let i = 0; i < taskRepo.tasks.length; i++) {
+        if(taskRepo.tasks[i].pastDeadline)
         {
-            tasks.splice(i,1)
+            taskRepo.tasks.splice(i,1)
         }
     }
-    renderTasks();
+    renderPage();
 }
 
 // Create a class to compose all other classes together and have a method like render page to render whole page
