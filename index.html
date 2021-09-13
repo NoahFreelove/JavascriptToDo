@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<body onload="UpdateTime()">
+<body onload="init()">
 <link rel="stylesheet" href="style.css">
 
   <body>
@@ -19,7 +19,7 @@
           <label id="deadlineLabel" for="deadline">Deadline (hour:minute):</label>
           <input type="text" id="deadline">
         </div>
-        <button onclick="AddTask()">Create New Task</button>
+        <button onclick="addTask()">Create New Task</button>
     </section>
 
     <h1>Current Tasks:</h1>
@@ -30,7 +30,12 @@
     <BR>
     <footer id="lastTimeUpdated">TIME</footer>
     <!--<button for="lastTimeUpdated" onclick="UpdateTime()">Update Time</button>-->
-
+    <script src="task.js"></script>
     <script src="main.js"></script>
+    <script src="checkDeadlines.js"></script>
+    <script src="renderPage.js"></script>
+    <script src="updateTime.js"></script>
+    <script src="taskManagement.js"></script>
+
   </body>
 </html>
