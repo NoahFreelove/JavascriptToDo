@@ -7,19 +7,6 @@
 * The time is updated every second and each task is checked to see if the deadline has been passed
 * */
 
-const doc = document;
-class Task
-{
-    // you can create default value for pastDeadline and make it optional
-    constructor(taskName, deadline, pastDeadline = null) {
-        this.taskName = taskName;
-        this.deadline = deadline;
-        // you set a default vqlue for a variable by usig OR operator too
-        //  this.pastDeadline = pastDeadline || null
-        this.pastDeadline = pastDeadline;
-    }
-}
-
 // Create a class to store tasks, you can name it TaskRepository
 
 const tasks = [];
@@ -72,8 +59,8 @@ function UpdateTime() {
     let s = date.getSeconds()
     let d = date.getDay()
     let mo = date.getMonth()
-    doc.getElementById('lastTimeUpdated').innerHTML =
-        `<footer>Last time updated: ${mo}/${d} at ${h}:${m}:${s}</footer>`;
+    document.getElementById('lastTimeUpdated').innerHTML =
+        `<footer>Last time updated22: ${mo}/${d} at ${h}:${m}:${s}</footer>`;
     if (CheckDeadlines()){
         RenderTasks();
         console.log("Rendered Tasks")
@@ -109,8 +96,8 @@ function AddTask() {
     // 1- for readability, try to decalre variable at the first of the function
     // 2- when number of parameters exceeds in one line, try to break each paramter in seprate line
     let tempTask = new Task(
-        doc.getElementById('taskName').value, // sometimes adding a comment in front of parameters, helps readability 
-        doc.getElementById('deadline').value
+        document.getElementById('taskName').value, // sometimes adding a comment in front of parameters, helps readability 
+        document.getElementById('deadline').value
     );
     tasks.push(tempTask);
     UpdateTime();
