@@ -22,6 +22,4 @@ function init()
     setInterval(updateTime , 1000); // update time every second
 }
 
-
-
 // Create a class to compose all other classes together and have a method like render page to render whole page

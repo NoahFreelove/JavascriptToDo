@@ -6,6 +6,8 @@ function addTask() // creates new tasks
         document.getElementById('taskName').value,
         document.getElementById('deadline').value
     );
+    document.getElementById('taskName').value = "";
+    document.getElementById('deadline').value = "";
 
     taskRepo.tasks.push(tempTask) // add the new task to the task repo
     renderPage(); // Render the page now that there is a new task
